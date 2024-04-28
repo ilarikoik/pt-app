@@ -1,0 +1,11 @@
+nav {
+  background-color: #9b3922;
+  text-align: center;
+  height: 510px;
+}
+
+nav a {
+  color: white; /* Set link text color */
+  text-decoration: none; /* Remove underline from links */
+  margin: 10px; /* Add margin to separate links */
+}
