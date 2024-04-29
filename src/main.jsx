@@ -4,18 +4,14 @@ import App from "./App.jsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import FrontPage from "./pages/Frontpage.jsx";
-import About from "./pages/About.jsx";
-import Contact from "./pages/Contact.jsx";
-import Home from "./pages/Home.jsx";
-import Classinfo from "./pages/Classinfo.jsx";
+import Customer from "./pages/Customer.jsx";
+import Training from "./pages/Training.jsx";
 
 const router = createBrowserRouter([
-  // Import components that are used in routes
   {
     path: "/",
     element: <App />,
     children: [
-      // children are nested routes with a route
       {
         element: <FrontPage />,
         index: true, // index route does not need any path
@@ -25,16 +21,12 @@ const router = createBrowserRouter([
         //   element: <FrontPage />,
       },
       {
-        path: "about",
-        element: <About />,
+        path: "customer",
+        element: <Customer />,
       },
       {
-        path: "contact",
-        element: <Contact />,
-      },
-      {
-        path: "class",
-        element: <Classinfo />,
+        path: "training",
+        element: <Training />,
       },
     ],
   },

@@ -19,7 +19,7 @@ export default function Asiakkaat() {
 
   const [columnDefs, setColumnDefs] = useState([
     {
-      headerName: "asiakkaan sivut",
+      headerName: "asiakkaiden sivut",
       cellRenderer: (params) => {
         return (
           <Button onClick={customersInfo()} variant="contained">

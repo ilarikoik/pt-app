@@ -18,7 +18,10 @@ export default function TabsMui() {
             centered
             textColor="inherit"
           >
-            <Tab label="Kaikki Asiakkaat" style={{ fontSize: "20px" }}></Tab>
+            <Tab
+              label="Kaikki Asiakkaat"
+              style={{ fontSize: "20px", backgroundColor: "orange" }}
+            ></Tab>
             <Tab label="tulevat Tunnit" style={{ fontSize: "20px" }}></Tab>
           </Tabs>
         </AppBar>

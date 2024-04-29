@@ -1,16 +1,14 @@
-import { useState } from "react";
-import "./App.css";
+import React from "react";
 import "./index.css";
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import AppBar from "./AppBar";
 
 function App() {
   return (
-    <nav className="navs">
-      <Link to={"/"}>HOME</Link>
-      <Link to={"/about"}>ABOUT</Link>
-      <Link to={"/contact"}>CONTACT</Link>
-      <Outlet></Outlet>
-    </nav>
+    <div>
+      <AppBar />
+      <Outlet />
+    </div>
   );
 }
 

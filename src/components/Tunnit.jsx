@@ -3,8 +3,6 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-material.css";
 import { useEffect, useState } from "react";
 import { Button } from "@mui/material";
-import { Link } from "react-router-dom";
-import Osallistujat from "./Osallistujat";
 
 export default function Tunnit() {
   const [show, setShow] = useState(false);
