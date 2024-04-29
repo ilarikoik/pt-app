@@ -51,7 +51,7 @@ export default function Training() {
     {
       headerName: "",
       cellRenderer: (params) => {
-        console.log(params.data); // Log row data
+        console.log(params.data);
         return (
           <Button
             onClick={() => deleteTraining(params)}
@@ -105,9 +105,9 @@ export default function Training() {
     fetchTranings();
   }, [refresh]);
 
-  const handleTrainingSave = (trainings) => {
+  const handleSave = (trainings) => {
     fetch(
-      "https://customerrestservice-personaltraining.rahtiapp.fi/trainings",
+      "https://customerrestservice-personaltraining.rahtiapp.fi/api/trainings",
       {
         method: "POST",
         headers: {
@@ -126,7 +126,7 @@ export default function Training() {
 
   return (
     <div>
-      <AddTraining handleTrainingSave={handleTrainingSave}></AddTraining>
+      <AddTraining handleSave={handleSave}></AddTraining>
       {!loading ? (
         <div
           className="ag-theme-material"

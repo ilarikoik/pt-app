@@ -9,7 +9,7 @@ import AddTraining from "../components/Addtraining";
 
 export default function Customer() {
   const [refresh, setRefresh] = useState(0);
-
+  const [customerLink, setCustomerLink] = useState("");
   const [customers, setCustomers] = useState([
     {
       firstname: "",
@@ -35,17 +35,22 @@ export default function Customer() {
       },
       width: 150,
     },
-    // {
-    //   headerName: "",
-    //   cellRenderer: (params) => {
-    //     return (
-    //       <AddTraining
-    //         handleClick={() => handleClick(params.data)}
-    //       ></AddTraining>
-    //     );
-    //   },
-    //   width: 180,
-    // },
+    {
+      headerName: "",
+      cellRenderer: (params) => {
+        if (params.data._links) {
+          return (
+            <Button onClick={() => handleClick(params)}>
+              <AddTraining customerLink={params.data._links.customer.href} />
+            </Button>
+          );
+        } else {
+          return null; // Or render some default UI if _links is undefined
+        }
+      },
+      width: 180,
+    },
+
     {
       headerName: "Nimi",
       valueGetter: (params) => {
@@ -101,9 +106,10 @@ export default function Customer() {
     },
   ]);
 
-  const handleClick = (data) => {
-    console.log(data);
+  const handleClick = (params) => {
+    setCustomerLink(params.data._links.customer.href);
   };
+
   const deleteCustomer = (params) => {
     console.log("----" + params.data._links.customer.href);
     fetch(params.data._links.customer.href, { method: "DELETE" })
@@ -158,6 +164,24 @@ export default function Customer() {
       .catch((err) => console.log(err));
   };
 
+  const handleSavet = (trainings) => {
+    fetch(
+      "https://customerrestservice-personaltraining.rahtiapp.fi/api/trainings",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(trainings),
+      }
+    )
+      .then((res) => {
+        if (res.ok) {
+          setRefresh((val) => val + 1);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
   const updateCustomer = (customer, link) => {
     fetch(link, {
       method: "PUT",
@@ -178,7 +202,7 @@ export default function Customer() {
     <>
       <br />
       <br />
-
+      <AddTraining handleSavet={handleSavet}></AddTraining>
       <AddCustomer handleSave={handleSave}></AddCustomer>
       <div className="ag-theme-material" style={{ width: "100%", height: 600 }}>
         <AgGridReact

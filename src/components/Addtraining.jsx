@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -18,6 +18,8 @@ export default function AddTraining(props) {
   });
 
   const handleClickOpen = () => {
+    console.log(props.customerLink);
+    setTrainings({ ...trainings, customer: props.customerLink });
     setOpen(true);
   };
 
@@ -30,7 +32,7 @@ export default function AddTraining(props) {
   };
 
   const addTraining = () => {
-    props.handleTrainingSave(trainings);
+    props.handleSave(trainings); // Call handleSave from props
     handleClose();
   };
 
