@@ -6,7 +6,6 @@ import { Button } from "@mui/material";
 import AddCustomer from "../components/Addcustomer";
 import EditCustomer from "../components/Editcustomer";
 import AddTraining from "../components/Addtraining";
-
 export default function Customer() {
   const [refresh, setRefresh] = useState(0);
   const [customerLink, setCustomerLink] = useState("");
@@ -164,24 +163,6 @@ export default function Customer() {
       .catch((err) => console.log(err));
   };
 
-  const handleSavet = (trainings) => {
-    fetch(
-      "https://customerrestservice-personaltraining.rahtiapp.fi/api/trainings",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(trainings),
-      }
-    )
-      .then((res) => {
-        if (res.ok) {
-          setRefresh((val) => val + 1);
-        }
-      })
-      .catch((err) => console.log(err));
-  };
   const updateCustomer = (customer, link) => {
     fetch(link, {
       method: "PUT",
@@ -202,8 +183,8 @@ export default function Customer() {
     <>
       <br />
       <br />
-      <AddTraining handleSavet={handleSavet}></AddTraining>
       <AddCustomer handleSave={handleSave}></AddCustomer>
+
       <div className="ag-theme-material" style={{ width: "100%", height: 600 }}>
         <AgGridReact
           rowData={customers}

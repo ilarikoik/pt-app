@@ -5,6 +5,9 @@ import { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import AddTraining from "../components/Addtraining";
 import EditCustomer from "../components/Editcustomer";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs from "dayjs";
 
 export default function Training() {
   const [refresh, setRefresh] = useState(0);
@@ -20,7 +23,35 @@ export default function Training() {
   ]);
 
   const [columnDefs, setColumnDefs] = useState([
-    { headerName: "Päivä", field: "date", filter: true, floatingFilter: true },
+    {
+      headerName: "Päivä",
+      field: "date",
+      filter: true,
+      floatingFilter: true,
+      valueGetter: (params) => {
+        const parsDate = params.data.date;
+        const pvm = dayjs(parsDate);
+        return pvm.format("DD-MM-YYYY");
+      },
+    },
+    {
+      headerName: "Kellonaika",
+      field: "date",
+      filter: true,
+      floatingFilter: true,
+      valueGetter: (params) => {
+        const parsDate = dayjs(params.data.date);
+        let hour = parsDate.hour();
+        let minute = parsDate.minute();
+        if (hour < 10) {
+          hour = "0" + hour;
+        }
+        if (minute < 10) {
+          minute = "0" + minute;
+        }
+        return `${hour}:${minute}`;
+      },
+    },
 
     {
       headerName: "Kesto",
@@ -105,28 +136,8 @@ export default function Training() {
     fetchTranings();
   }, [refresh]);
 
-  const handleSave = (trainings) => {
-    fetch(
-      "https://customerrestservice-personaltraining.rahtiapp.fi/api/trainings",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(trainings),
-      }
-    )
-      .then((res) => {
-        if (res.ok) {
-          setRefresh((val) => val + 1);
-        }
-      })
-      .catch((err) => console.log(err));
-  };
-
   return (
     <div>
-      <AddTraining handleSave={handleSave}></AddTraining>
       {!loading ? (
         <div
           className="ag-theme-material"

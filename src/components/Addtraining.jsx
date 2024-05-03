@@ -6,12 +6,16 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import { DatePicker, pickersMonthClasses } from "@mui/x-date-pickers";
+import Datepicker from "../components/Datepicker";
+import { PopoverRoot } from "@mui/material";
 
 export default function AddTraining(props) {
   const [open, setOpen] = useState(false);
+  const [hmm, setHmm] = useState(Object);
 
   const [trainings, setTrainings] = useState({
-    date: "",
+    date: new Date(),
     duration: "",
     activity: "",
     customer: "",
@@ -29,12 +33,48 @@ export default function AddTraining(props) {
 
   const handleInputChange = (event) => {
     setTrainings({ ...trainings, [event.target.name]: event.target.value });
+
+    console.log(trainings);
   };
 
   const addTraining = () => {
-    props.handleSave(trainings); // Call handleSave from props
+    handleSavet(trainings);
     handleClose();
   };
+
+  const handleSavet = (trainings) => {
+    fetch(
+      "https://customerrestservice-personaltraining.rahtiapp.fi/api/trainings",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(trainings),
+      }
+    )
+      .then((res) => {
+        if (res.ok) {
+          // setRefresh((val) => val + 1);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
+  //props date ei toiminu handleinputchangessa jostai syystä ja tää pitää olla useeffecti sisäl muute ikuine looppi eli errori
+  useEffect(() => {
+    const newDate = new Date(props.date);
+
+    // Check if newDate is a valid date
+    if (!isNaN(newDate.getTime())) {
+      setTrainings({ ...trainings, date: newDate });
+      console.log("VVVIVIIV " + trainings.date);
+      console.log(trainings);
+      console.log("-- - - - " + newDate.toISOString());
+    } else {
+      console.error("Invalid date:", props.date);
+    }
+  }, [props.date]);
 
   return (
     <div>
@@ -49,21 +89,20 @@ export default function AddTraining(props) {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Uusi harjoitus</DialogTitle>
         <DialogContent>
-          {/* 
-          <DialogContentText>
-            To subscribe to this website, please enter your email address here. We
-            will send updates occasionally.
-          </DialogContentText> */}
-          <TextField
+          {/* <TextField
             autoFocus
             required
             margin="dense"
             name="date"
             value={trainings.date}
-            onChange={(e) => handleInputChange(e)}
+            onChange={(e) =>
+              setTrainings({ ...trainings, date: e.target.value })
+            }
             label="Päivä"
             variant="standard"
-          />
+          /> */}
+
+          <Datepicker value={props.date} />
 
           <TextField
             autoFocus

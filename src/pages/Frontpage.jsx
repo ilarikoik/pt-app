@@ -24,10 +24,7 @@ export default function FrontPage() {
         obcaecati cumque asperiores blanditiis neque quis facilis! Veniam
         facilis laudantium similique odio.
       </p>
-      <div className="buttons">
-        <button>LISÄÄ ASIAKAS</button>
-        <button>LISÄÄ TUNTI</button>
-      </div>
+      <div className="buttons"></div>
       <TabsMui></TabsMui>
     </div>
   );
