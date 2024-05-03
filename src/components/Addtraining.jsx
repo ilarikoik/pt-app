@@ -9,13 +9,14 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { DatePicker, pickersMonthClasses } from "@mui/x-date-pickers";
 import Datepicker from "../components/Datepicker";
 import { PopoverRoot } from "@mui/material";
+import dayjs from "dayjs";
 
 export default function AddTraining(props) {
   const [open, setOpen] = useState(false);
-  const [hmm, setHmm] = useState(Object);
+  const [hmm, setHmm] = useState("");
 
   const [trainings, setTrainings] = useState({
-    date: new Date(),
+    date: "",
     duration: "",
     activity: "",
     customer: "",
@@ -62,19 +63,20 @@ export default function AddTraining(props) {
   };
 
   //props date ei toiminu handleinputchangessa jostai syystä ja tää pitää olla useeffecti sisäl muute ikuine looppi eli errori
-  useEffect(() => {
-    const newDate = new Date(props.date);
+  // useEffect(() => {
+  //   const newDate = new Date(props.date);
+  //   // Check if newDate is a valid date
+  //   if (!isNaN(newDate.getTime())) {
+  //     setTrainings({ ...trainings, date: newDate });
+  //     console.log("VVVIVIIV " + trainings.date);
+  //     console.log(trainings);
+  //     console.log("-- - - - " + newDate.toISOString());
+  //   } else {
+  //     console.error("Invalid date:", props.date);
+  //   }
+  // }, [props.date]);
 
-    // Check if newDate is a valid date
-    if (!isNaN(newDate.getTime())) {
-      setTrainings({ ...trainings, date: newDate });
-      console.log("VVVIVIIV " + trainings.date);
-      console.log(trainings);
-      console.log("-- - - - " + newDate.toISOString());
-    } else {
-      console.error("Invalid date:", props.date);
-    }
-  }, [props.date]);
+  console.log("vaaaaaaaaaaat " + props.dateFormat);
 
   return (
     <div>
@@ -89,20 +91,23 @@ export default function AddTraining(props) {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Uusi harjoitus</DialogTitle>
         <DialogContent>
-          {/* <TextField
+          <Datepicker
+            value={props.dateFormat}
+            onChange={(e) =>
+              setTrainings({ ...trainings, date: e.target.value })
+            }
+          />
+          <TextField
             autoFocus
             required
             margin="dense"
             name="date"
-            value={trainings.date}
-            onChange={(e) =>
-              setTrainings({ ...trainings, date: e.target.value })
-            }
-            label="Päivä"
+            value={props.dateFormat}
+            onChange={(e) => handleInputChange(e)}
+            label="Päivä ja Aika"
             variant="standard"
-          /> */}
-
-          <Datepicker value={props.date} />
+            // defaultValue={}
+          />
 
           <TextField
             autoFocus

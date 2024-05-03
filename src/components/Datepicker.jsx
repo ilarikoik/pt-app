@@ -5,24 +5,26 @@ import Typography from "@mui/material/Typography";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AddTraining from "./Addtraining";
 
 export default function ReferenceDateExplicitDateTimePicker() {
   const [value, setValue] = useState(null);
-  const [date, setDate] = useState("");
+  const [dateFormat, setDateFormat] = useState("");
 
   const handleDateChange = (value) => {
-    console.log("-----" + value);
-    console.log("-----" + value.format());
-    setDate(value.format());
-    console.log("......" + date);
+    setDateFormat(value.format());
+    console.log("Stored value:", dateFormat);
     setValue(value);
   };
 
+  useEffect(() => {
+    console.log("Stored value:", dateFormat);
+  }, [dateFormat]);
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <AddTraining date={date} />
+      <AddTraining dateFormat={dateFormat} />
       <Stack spacing={2} sx={{ minWidth: 305 }}>
         <DateTimePicker
           value={value}
@@ -30,7 +32,9 @@ export default function ReferenceDateExplicitDateTimePicker() {
           onChange={handleDateChange}
         />
         <Typography>
-          Stored value: {value == null ? "null" : value.format()}
+          {dateFormat === null
+            ? "null"
+            : `Kopioi teksi Päivä ja Aika kenttään: ${dateFormat}`}
         </Typography>
       </Stack>
     </LocalizationProvider>

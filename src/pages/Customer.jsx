@@ -184,7 +184,6 @@ export default function Customer() {
       <br />
       <br />
       <AddCustomer handleSave={handleSave}></AddCustomer>
-
       <div className="ag-theme-material" style={{ width: "100%", height: 600 }}>
         <AgGridReact
           rowData={customers}
