@@ -1,5 +1,6 @@
 import TabsMui from "../components/TabsMUI";
 import "../index.css";
+import DownloadCsv from "../components/DownloadCsv";
 
 export default function FrontPage() {
   return (
@@ -24,7 +25,7 @@ export default function FrontPage() {
         obcaecati cumque asperiores blanditiis neque quis facilis! Veniam
         facilis laudantium similique odio.
       </p>
-      <div className="buttons"></div>
+      <DownloadCsv></DownloadCsv>
       <TabsMui></TabsMui>
     </div>
   );

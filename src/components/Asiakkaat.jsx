@@ -18,17 +18,18 @@ export default function Asiakkaat() {
   ]);
 
   const [columnDefs, setColumnDefs] = useState([
-    {
-      headerName: "asiakkaiden sivut",
-      cellRenderer: (params) => {
-        return (
-          <Button onClick={customersInfo()} variant="contained">
-            VARAUKSET
-          </Button>
-        );
-      },
-      width: 150,
-    },
+    // {
+
+    //   headerName: "asiakkaiden sivut",
+    //   cellRenderer: (params) => {
+    //     return (
+    //       <Button onClick={customersInfo()} variant="contained">
+    //         VARAUKSET
+    //       </Button>
+    //     );
+    //   },
+    //   width: 150,
+    // },
     {
       headerName: "Nimi",
       valueGetter: (params) => {

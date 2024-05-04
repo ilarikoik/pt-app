@@ -46,21 +46,21 @@ export default function Tunnit() {
         return params.data.firstname + " " + params.data.lastname;
       },
     },
-    {
-      headerName: "Osallistujat",
-      cellRenderer: (params) => {
-        return (
-          <Button
-            onClick={() => handleClick(params)}
-            variant="contained"
-            color="warning"
-          >
-            WHO JOINED
-          </Button>
-        );
-      },
-      width: 170,
-    },
+    // {
+    //   headerName: "Osallistujat",
+    //   cellRenderer: (params) => {
+    //     return (
+    //       <Button
+    //         onClick={() => handleClick(params)}
+    //         variant="contained"
+    //         color="warning"
+    //       >
+    //         WHO JOINED
+    //       </Button>
+    //     );
+    //   },
+    //   width: 170,
+    // },
   ]);
 
   const handleClick = (params) => {
