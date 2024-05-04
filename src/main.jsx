@@ -7,6 +7,7 @@ import FrontPage from "./pages/Frontpage.jsx";
 import Customer from "./pages/Customer.jsx";
 import Training from "./pages/Training.jsx";
 import AddTraining from "./components/Addtraining.jsx";
+import Calendar from "./components/Calendar.jsx";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: "training",
         element: <Training />,
+      },
+      {
+        path: "calendar",
+        element: <Calendar />,
       },
     ],
   },

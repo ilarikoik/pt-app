@@ -5,7 +5,6 @@ import DownloadCsv from "../components/DownloadCsv";
 export default function FrontPage() {
   return (
     <div className="frontpage">
-      <h1>ETUSIVU</h1>
       <p>
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odit nemo
         ducimus quas hic eum corporis quis facilis labore quasi explicabo
