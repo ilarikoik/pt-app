@@ -107,7 +107,6 @@ export default function Training() {
     )
       .then((res) => {
         if (res.ok) {
-          console.log("ye");
           setRefresh((val) => val + 1);
         } else {
           window.alert("NO delete");
@@ -128,7 +127,7 @@ export default function Training() {
           return res.json();
         })
         .then((data) => {
-          console.log(data), setTrainings(data);
+          setTrainings(data);
         })
         .then(setLoading(false))
         .catch((err) => console.log(err));

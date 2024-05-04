@@ -8,6 +8,7 @@ import Customer from "./pages/Customer.jsx";
 import Training from "./pages/Training.jsx";
 import AddTraining from "./components/Addtraining.jsx";
 import Calendar from "./components/Calendar.jsx";
+import Chart from "./components/Chart.jsx";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: "calendar",
         element: <Calendar />,
+      },
+      {
+        path: "chart",
+        element: <Chart />,
       },
     ],
   },

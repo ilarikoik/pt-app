@@ -9,6 +9,7 @@ function AppBar() {
         <Link to={"/customer"}>CUSTOMER</Link>
         <Link to={"/training"}>TRAINING</Link>
         <Link to={"/calendar"}>CALENDAR</Link>
+        <Link to={"/chart"}>CHART</Link>
       </nav>
     </div>
   );

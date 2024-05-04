@@ -15,6 +15,7 @@ const Calendar = () => {
     },
   ]);
 
+  // VAIHA TÄÄ https://customerrestservice-personaltraining.rahtiapp.fi/gettrainings , ei tartte tota säätöö
   useEffect(() => {
     const fetchTranings = () => {
       fetch(
@@ -61,7 +62,6 @@ const Calendar = () => {
         })
         .catch((err) => console.log(err));
     };
-
     fetchTranings();
   }, []);
 
