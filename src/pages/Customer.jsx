@@ -26,6 +26,7 @@ export default function Customer() {
       headerName: "EDIT",
       cellRenderer: (params) => {
         return (
+          //lähetetää customer tiedot tonne ja tallennusfunktio
           <EditCustomer
             customer={params.data}
             updateCustomer={updateCustomer}
@@ -44,7 +45,7 @@ export default function Customer() {
             </Button>
           );
         } else {
-          return null; // Or render some default UI if _links is undefined
+          return null;
         }
       },
       width: 180,

@@ -6,17 +6,9 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import {
-  DatePicker,
-  DateTimePicker,
-  pickersMonthClasses,
-} from "@mui/x-date-pickers";
-import Datepicker from "../components/Datepicker";
-import { PopoverRoot } from "@mui/material";
-import { DateTimeField } from "@mui/x-date-pickers/DateTimeField";
+import { DateTimePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 
 export default function AddTraining(props) {
   const [open, setOpen] = useState(false);

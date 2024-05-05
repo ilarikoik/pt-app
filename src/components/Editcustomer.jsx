@@ -60,11 +60,6 @@ export default function EditCustomer(props) {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Päivitä tietoja</DialogTitle>
         <DialogContent>
-          {/* 
-          <DialogContentText>
-            To subscribe to this website, please enter your email address here. We
-            will send updates occasionally.
-          </DialogContentText> */}
           <TextField
             autoFocus
             required

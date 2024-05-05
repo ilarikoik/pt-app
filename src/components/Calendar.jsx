@@ -4,6 +4,8 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { useState, useEffect } from "react";
+import { duration } from "@mui/material";
+import { iterate } from "localforage";
 
 const Calendar = () => {
   const [trainings, setTrainings] = useState([
@@ -15,11 +17,10 @@ const Calendar = () => {
     },
   ]);
 
-  // VAIHA TÄÄ https://customerrestservice-personaltraining.rahtiapp.fi/gettrainings , ei tartte tota säätöö
   useEffect(() => {
     const fetchTranings = () => {
       fetch(
-        `https://customerrestservice-personaltraining.rahtiapp.fi/api/trainings`
+        `https://customerrestservice-personaltraining.rahtiapp.fi/gettrainings`
       )
         .then((res) => {
           if (!res.ok) {
@@ -28,40 +29,16 @@ const Calendar = () => {
           return res.json();
         })
         .then((data) => {
-          const trainingPromises = data._embedded.trainings.map((training) => {
-            // pitää tehää uus fetchi jokaselle muute se ei pääse käsiks customer objektii?
-            return (
-              fetch(training._links.customer.href)
-                .then((res) => {
-                  if (!res.ok) {
-                    throw Error(console.log(res.statusText));
-                  }
-                  return res.json();
-                })
-                // palauttaa customer objektin
-                .then((customer) => {
-                  return {
-                    ...training,
-                    title: [
-                      `${training.activity}`,
-                      ` /  ${training.duration}`,
-                      ` /   ${customer.firstname} ${customer.lastname}`,
-                    ].join(", "),
-                    start: training.date,
-                    allDay: false,
-                  };
-                })
-            );
-          });
-          // odottaa että kaikki on ladattu ja asetettu ilman erroreita ja sitten kerraalla asettaa uudet tilat
-          Promise.all(trainingPromises)
-            .then((trainingsWithActivity) => {
-              setTrainings(trainingsWithActivity);
-            })
-            .catch((err) => console.log(err));
+          const newTrainings = data.map((item) => ({
+            //start ja title on fullcalendarin jutut ja niihi pitänee laittaa noi tiedot?
+            start: item.date,
+            title: `${item.activity} ${item.duration} ${item.customer.firstname} ${item.customer.lastname} `,
+          }));
+          setTrainings(newTrainings);
         })
-        .catch((err) => console.log(err));
+        .catch((error) => console.error("Error fetching trainings:", error));
     };
+
     fetchTranings();
   }, []);
 
