@@ -1,6 +1,6 @@
 {
-  "homepage": "https://github.com/ilarikoik/pt-app",
   "name": "pt-app",
+  "homepage": "https://github.com/ilarikoik/pt-app",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,7 +10,7 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
