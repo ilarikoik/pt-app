@@ -1,7 +1,6 @@
 import TabsMui from "../components/TabsMUI";
 import "../index.css";
 import DownloadCsv from "../components/DownloadCsv";
-import Chart from "../components/Chart";
 
 export default function FrontPage() {
   return (

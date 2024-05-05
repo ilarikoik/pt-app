@@ -63,28 +63,43 @@ const Chart = () => {
   }
 
   return (
-    <div
-      style={{
-        backgroundColor: "white",
-        color: "white",
-        height: "50vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Bar
-        data={{
-          labels: Array.from(map.keys()),
-          datasets: [
-            {
-              label: "Minutes",
-              data: Array.from(map.values()),
-              backgroundColor: ["#242424", "#F2613F"],
-            },
-          ],
+    <div style={{ display: "flex", flex: 1 }}>
+      <div style={{ flex: 1, backgroundColor: "white" }}>
+        <Bar
+          data={{
+            labels: Array.from(map.keys()),
+            datasets: [
+              {
+                label: "Minutes",
+                data: Array.from(map.values()),
+                backgroundColor: "#242424",
+                borderRadius: 10,
+              },
+            ],
+          }}
+        />
+      </div>
+      <div
+        style={{
+          flex: 1,
+          height: "500px",
+          backgroundColor: "darkgray",
         }}
-      ></Bar>
+      >
+        <Doughnut
+          data={{
+            labels: Array.from(map.keys()),
+            datasets: [
+              {
+                label: "Minutes",
+                data: Array.from(map.values()),
+                backgroundColor: ["#F2613F"],
+                borderRadius: 10,
+              },
+            ],
+          }}
+        />
+      </div>
     </div>
   );
 };

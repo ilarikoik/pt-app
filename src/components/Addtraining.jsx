@@ -6,14 +6,21 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { DatePicker, pickersMonthClasses } from "@mui/x-date-pickers";
+import {
+  DatePicker,
+  DateTimePicker,
+  pickersMonthClasses,
+} from "@mui/x-date-pickers";
 import Datepicker from "../components/Datepicker";
 import { PopoverRoot } from "@mui/material";
-import dayjs from "dayjs";
+import { DateTimeField } from "@mui/x-date-pickers/DateTimeField";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 
 export default function AddTraining(props) {
   const [open, setOpen] = useState(false);
-  const [hmm, setHmm] = useState("");
+  const [value, setValue] = useState(new Date());
 
   const [trainings, setTrainings] = useState({
     date: "",
@@ -23,8 +30,11 @@ export default function AddTraining(props) {
   });
 
   const handleClickOpen = () => {
-    console.log(props.customerLink);
-    setTrainings({ ...trainings, customer: props.customerLink });
+    setTrainings({
+      ...trainings,
+      customer: props.customerLink,
+      date: value,
+    });
     setOpen(true);
   };
 
@@ -39,7 +49,8 @@ export default function AddTraining(props) {
   };
 
   const addTraining = () => {
-    handleSavet(trainings);
+    const newTrainings = { ...trainings, date: value };
+    handleSavet(newTrainings);
     handleClose();
   };
 
@@ -62,21 +73,9 @@ export default function AddTraining(props) {
       .catch((err) => console.log(err));
   };
 
-  //props date ei toiminu handleinputchangessa jostai syystä ja tää pitää olla useeffecti sisäl muute ikuine looppi eli errori
-  // useEffect(() => {
-  //   const newDate = new Date(props.date);
-  //   // Check if newDate is a valid date
-  //   if (!isNaN(newDate.getTime())) {
-  //     setTrainings({ ...trainings, date: newDate });
-  //     console.log("VVVIVIIV " + trainings.date);
-  //     console.log(trainings);
-  //     console.log("-- - - - " + newDate.toISOString());
-  //   } else {
-  //     console.error("Invalid date:", props.date);
-  //   }
-  // }, [props.date]);
-
-  console.log("vaaaaaaaaaaat " + props.dateFormat);
+  console.log("vvvvvvvvvvvvvvvvv " + props.dateFormat);
+  console.log("aaaaaaaaaaaaaaaaa " + trainings.date);
+  console.log("qqqqqq " + value);
 
   return (
     <div>
@@ -91,23 +90,24 @@ export default function AddTraining(props) {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Uusi harjoitus</DialogTitle>
         <DialogContent>
-          <Datepicker
-            value={props.dateFormat}
-            onChange={(e) =>
-              setTrainings({ ...trainings, date: e.target.value })
-            }
-          />
-          <TextField
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DateTimePicker
+              label="Controlled field"
+              ampm={false}
+              onChange={(newValue) => setValue(newValue.toISOString())}
+            />
+          </LocalizationProvider>
+          <br />
+          {/* <TextField
             autoFocus
             required
             margin="dense"
             name="date"
-            value={props.dateFormat}
+            value={trainings.date}
             onChange={(e) => handleInputChange(e)}
             label="Päivä ja Aika"
             variant="standard"
-            // defaultValue={}
-          />
+          /> */}
 
           <TextField
             autoFocus
