@@ -6,7 +6,7 @@ import AppBar from "./AppBar";
 function App() {
   return (
     <div>
-      <AppBar />
+      <AppBar></AppBar>
       <Outlet />
     </div>
   );

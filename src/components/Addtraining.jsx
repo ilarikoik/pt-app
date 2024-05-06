@@ -84,7 +84,7 @@ export default function AddTraining(props) {
         <DialogContent>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DateTimePicker
-              label="Controlled field"
+              label="Aika ja Päivä"
               ampm={false}
               onChange={(newValue) => setValue(newValue.toISOString())}
             />

@@ -48,7 +48,7 @@ export default function Customer() {
           return null;
         }
       },
-      width: 180,
+      width: 200,
     },
 
     {
@@ -98,7 +98,7 @@ export default function Customer() {
             variant="contained"
             color="error"
           >
-            DELETE
+            POISTA
           </Button>
         );
       },

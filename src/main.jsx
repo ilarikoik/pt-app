@@ -17,11 +17,7 @@ const router = createBrowserRouter([
     children: [
       {
         element: <FrontPage />,
-        index: true, // index route does not need any path
-        // },
-        // {
-        //   path: "frontpage",
-        //   element: <FrontPage />,
+        index: true,
       },
       {
         path: "customer",
